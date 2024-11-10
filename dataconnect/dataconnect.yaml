@@ -1,0 +1,12 @@
+specVersion: "v1beta"
+serviceId: "WDev Compositor"
+location: "us-south1"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "fdcdb"
+      cloudSql:
+        instanceId: "WDev Compositor-fdc"
+      # schemaValidation: "COMPATIBLE"
+connectorDirs: ["./connector"]
