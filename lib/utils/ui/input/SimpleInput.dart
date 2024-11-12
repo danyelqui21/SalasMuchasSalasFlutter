@@ -31,14 +31,14 @@ class _SimpleInput extends State<SimpleInput> {
             style: TextStyle(
               color: MyTheme.textColor,
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: 15,
             ),
           ),
           SizedBox(height: 5), // Espacio entre el texto y el input
             Container(
               decoration: BoxDecoration(
                 color: MyTheme.lightGray, // Color del campo de entrada
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
               ),
               padding: const EdgeInsets.only(left: 10),
               child: TextField(
@@ -50,7 +50,7 @@ class _SimpleInput extends State<SimpleInput> {
                   hintStyle: TextStyle(color: MyTheme.hintTextColor),
                   border: InputBorder.none,
                   counterText: '',
-                  contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 6),
                 )
               ),
             )

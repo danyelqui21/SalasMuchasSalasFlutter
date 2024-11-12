@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wdevproject/Themes/MyTheme.dart';
 import 'package:wdevproject/features/login/presentation/LoginScreen.dart';
 import 'package:wdevproject/features/register/presentation/RegisterScreen.dart';
 
 void main() {
+
+  //WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  //FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarColor: MyTheme.primaryColor));
+
   runApp(MyApp());
+
 }
 
 class MyApp extends StatelessWidget {

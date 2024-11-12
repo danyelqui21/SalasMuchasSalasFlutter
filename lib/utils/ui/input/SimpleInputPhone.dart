@@ -25,7 +25,7 @@ class _SimplePhoneInputState extends State<SimpleInputPhone> {
           Text(
             "Número de teléfono",
             style: TextStyle(
-              fontSize: 16,
+              fontSize: 15,
               fontWeight: FontWeight.bold,
               color: MyTheme.textColor,
             ),
@@ -41,10 +41,10 @@ class _SimplePhoneInputState extends State<SimpleInputPhone> {
               filled: true,
               fillColor: MyTheme.lightGray,
               border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide.none,
               ),
-              contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 21),
+              contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 15),
             ),
             style: TextStyle(fontSize: 16),
           ),

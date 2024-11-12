@@ -52,9 +52,9 @@ class _DropdownClearTextState extends State<DropdownClearText> {
           Container(
             decoration: BoxDecoration(
               color: MyTheme.lightGray, // Color del campo de entrada
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
             ),
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 15),
             child: DropdownMenu(
               width: double.infinity,
               initialSelection: widget.items.first,

@@ -18,7 +18,7 @@ class CustomButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: isLoading ? null : onPressed, // Disable button if loading
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 55), // Botón full width
+        minimumSize: const Size(double.infinity, 50), // Botón full width
         backgroundColor: MyTheme.buttonColor,
         foregroundColor: MyTheme.buttonTextColor, // Set text color here
       ),
@@ -26,7 +26,7 @@ class CustomButton extends StatelessWidget {
           ? const CircularProgressIndicator(color: MyTheme.buttonTextColor)
           : Text(
               text, // This can be a variable
-              style: const TextStyle(fontSize: 18), // Keep this constant
+              style: const TextStyle(fontSize: 16), // Keep this constant
             ),
     );
   }

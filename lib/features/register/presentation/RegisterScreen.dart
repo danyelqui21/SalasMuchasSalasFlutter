@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wdevproject/Themes/MyTheme.dart';
-import 'package:wdevproject/Themes/colors.dart';
-import 'package:wdevproject/navigation/BackButtonHandler.dart';
-import 'package:wdevproject/utils/ui/buttons/BiometricAuthButton.dart';
 import 'package:wdevproject/utils/ui/buttons/CustomButton.dart';
 import 'package:wdevproject/utils/ui/dropdown/DropdownMenuApp.dart';
 import 'package:wdevproject/utils/ui/input/InputPassword.dart';
@@ -51,19 +47,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
         child: Scaffold(
           appBar: AppBar(
             title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10.0),
-                child: Image.asset('assets/images/logo2.png', width: 50, height: 50),
+                child: Image.asset('assets/images/logo2.png', width: 50),
               ),
-              SizedBox(width: 10),
-              Text("Muebles de éxito",
-                  style: const TextStyle(
-                  color: MyTheme.white,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20
-              )),
+              SizedBox(width: 40),
+
             ],
           ),
           ),
@@ -95,11 +86,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   onPressed: () => {},
                                   imagePath: AssetImage('assets/images/google_icon.png'),
                                   text: "Regístrate con Google"),
-                              SocialButton(
+                           /*
+                            TODO: Implement Facebook auth futher
+
+                             SocialButton(
                                   onPressed: () => {},
                                   imagePath:
                                   AssetImage('assets/images/facebook_logo.png'),
-                                  text: "Regístrate con Facebook"),
+                                  text: "Regístrate con Facebook"), */
                             ],
                           )),
 

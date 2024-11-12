@@ -22,17 +22,17 @@ class SocialButton extends StatelessWidget {
           child: CircleAvatar(
             radius: 25,
             backgroundColor: Colors.white,
-            child: Image(image: imagePath),
+            child: Image(image: imagePath, height: 45),
           ),
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 8),
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 120), // Limita el ancho para que el texto se ajuste
           child: Text(
             text,
             style: TextStyle(
               color: MyTheme.textColor,
-              fontSize: 14,
+              fontSize: 13,
               fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center, // Alinea el texto al centro

@@ -23,7 +23,7 @@ class _InputPasswordState extends State<InputPassword> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,14 +34,14 @@ class _InputPasswordState extends State<InputPassword> {
             style: TextStyle(
               color: MyTheme.textColor,
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: 15,
             ),
           ),
           SizedBox(height: 5), // Espacio entre el texto y el input
           Container(
             decoration: BoxDecoration(
               color: MyTheme.lightGray, // Color del campo de entrada
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(10),
             ),
             padding: const EdgeInsets.only(left: 10),
             child: TextField(
@@ -56,11 +56,11 @@ class _InputPasswordState extends State<InputPassword> {
                 hintStyle: TextStyle(color: MyTheme.hintTextColor),
                 border: InputBorder.none,
                 counterText: '',
-                contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 6),
                 suffixIcon: IconButton(
                   icon: Icon(
                     showPassword ? Icons.visibility_off : Icons.visibility,
-                    color: MyTheme.primaryColor, // Puedes ajustar el color aquí
+                    color: MyTheme.primaryColor // Puedes ajustar el color aquí
                   ),
                   onPressed: () {
                     setState(() {

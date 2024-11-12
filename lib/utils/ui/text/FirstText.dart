@@ -5,9 +5,9 @@ class FirstText extends StatelessWidget {
   final String text; // Texto que se muestra en el componente
 
   const FirstText({
-    Key? key,
+    super.key,
     required this.text,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class FirstText extends StatelessWidget {
       style: const TextStyle(
         color: MyTheme.textColor,
         fontWeight: FontWeight.bold,
-        fontSize: 21
+        fontSize: 20
       ),
     );
   }
