@@ -21,8 +21,8 @@ class LinkText extends StatelessWidget {
           text,
           style: const TextStyle(
             color: MyTheme.primaryColor, // Color del texto
-            fontSize: 16, // Tamaño del texto
-            fontWeight: FontWeight.bold, // Peso de la fuente
+            fontSize: 15, // Tamaño del texto
+            fontWeight: FontWeight.normal, // Peso de la fuente
           ),
         ),
       ),

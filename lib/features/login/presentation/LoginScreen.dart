@@ -11,20 +11,15 @@ import 'package:wdevproject/utils/ui/text/LinkText.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
-// #docregion Initialize
 const List<String> scopes = <String>[
   'email',
-  'profile'
-  //'https://www.googleapis.com/auth/contacts.readonly',
+  'profile',
 ];
 
 GoogleSignIn _googleSignIn = GoogleSignIn(
-  // Optional clientI// d
-  serverClientId:
-      '901881345005-k26vbbnr4pp0chnog8trq9bbg8khknoa.apps.googleusercontent.com',
+  serverClientId: '901881345005-k26vbbnr4pp0chnog8trq9bbg8khknoa.apps.googleusercontent.com',
   scopes: scopes,
 );
-// #enddocregion Initialize
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -41,114 +36,128 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    // Set the status bar to black when this screen is first shown
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.black, // Black status bar
-      statusBarIconBrightness:
-          Brightness.light, // Light icons for black background
+      statusBarColor: Colors.black,
+      statusBarIconBrightness: Brightness.light,
     ));
-
-    // Add observer to listen to lifecycle changes
     WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-        child: Scaffold(
-            appBar: AppBar(
-              elevation: 0,
-              toolbarHeight: 0,
-              backgroundColor: MyTheme.primaryColor,
-              systemOverlayStyle: SystemUiOverlayStyle.light,
-            ),
-            body: Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  // Centra verticalmente
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  // Centra horizontalmente
-                  children: [
-                    // Logo
-                    const SizedBox(height: 1),
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: MyTheme.borderColor),
-                          borderRadius: BorderRadius.circular(20)),
-                      padding: EdgeInsets.all(5),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(40.0),
-                          child: Image.asset('assets/images/logo2.png',
-                              width: 150)),
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          // Si el ancho de la pantalla es mayor a 1024px, mostramos la imagen y el formulario
+          if (constraints.maxWidth > 1000) {
+            return Row(
+              children: [
+                // Imagen a la izquierda
+                Expanded(
+                  flex: 10,
+                  child: Container(
+                    height: double.infinity,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/cover.png'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
-
-                    const SizedBox(height: 20),
-
-                    // Campo de correo electrónico
-                    SimpleInputPhone(),
-
-                    const SizedBox(height: 20),
-
-                    // Campo de correo electrónico
-                    InputPassword(controller: _passwordController),
-                    const SizedBox(height: 20),
-
-                    // Botón de Iniciar Sesión
-                    CustomButton(
-                      onPressed: () {
-                        if (!isLoading) {
-                          _startSession(); // Aquí se llama el método correctamente
-                        }
-                      },
-                      text: "Iniciar sesión",
-                      isLoading: isLoading,
-                    ),
-
-                    const SizedBox(height: 10),
-
-                    /*BiometricAuthButton(
-              onAuthenticated: () {
-                // Lógica que se ejecuta después de la autenticación exitosa
-              },
-            ),*/
-
-                    // Texto de Registrarse
-                    LinkText(
-                        onPressed: () => {}, text: "¿Olvidaste tu contraseña?"),
-
-                    // Texto de Registrarse
-                    LinkText(
-                        onPressed: () =>
-                            {Navigator.pushNamed(context, '/register')},
-                        text: "Registrarse"),
-
-                    const SizedBox(height: 25),
-
-                    OrDivider(),
-
-                    Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            SocialButton(
-                                onPressed: () => {HandleSignIn()},
-                                imagePath:
-                                    AssetImage('assets/images/google_icon.png'),
-                                text: "Login with Google"),
-                            SocialButton(
-                                onPressed: () => {},
-                                imagePath: AssetImage(
-                                    'assets/images/facebook_logo.png'),
-                                text: "Login with Facenook"),
-                          ],
-                        )),
-                  ],
+                  ),
                 ),
+                // Formulario a la derecha
+                Expanded(
+                  flex: 7,
+                  child: _buildLoginForm(padding: EdgeInsets.symmetric(vertical: 100, horizontal: 80)),
+
+                ),
+              ],
+            );
+          }
+
+          else if (constraints.maxWidth > 600){
+            // En pantallas medianas y pequeñas, solo mostramos el formulario centrado
+            return Center(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(0),
+                child: _buildLoginForm(padding: EdgeInsets.symmetric(vertical: 40, horizontal: 10)),
               ),
-            )));
+            );
+          }
+          else {
+            // En pantallas medianas y pequeñas, solo mostramos el formulario centrado
+            return Center(
+              child: SingleChildScrollView(
+                padding: EdgeInsets.all(0),
+                child: _buildLoginForm(padding: EdgeInsets.symmetric(vertical: 40, horizontal: 15)),
+              ),
+            );
+          }
+        },
+      ),
+    );
+  }
+
+  // Formulario de login (reutilizable)
+  Widget _buildLoginForm({required EdgeInsets padding}) {
+    return Card(
+      color: MyTheme.white,
+      elevation: 1, // Sombra de la tarjeta
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(5), // Bordes redondeados
+      ),
+      child: Container(
+        constraints: BoxConstraints(maxWidth: 650), // Limita el ancho del formulario
+        padding: padding,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(height: 1),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: MyTheme.borderColor),
+                  borderRadius: BorderRadius.circular(20)),
+              padding: EdgeInsets.all(5),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(40.0),
+                  child: Image.asset('assets/images/logo2.png',
+                      width: 120)),
+            ),
+
+            const SizedBox(height: 20),
+            SimpleInputPhone(),
+            const SizedBox(height: 20),
+            InputPassword(controller: _passwordController),
+            const SizedBox(height: 20),
+            CustomButton(
+              onPressed: () {
+                if (!isLoading) {
+                  _startSession();
+                }
+              },
+              text: "Iniciar sesión",
+              isLoading: isLoading,
+            ),
+            const SizedBox(height: 10),
+            LinkText(onPressed: () {}, text: "¿Olvidaste tu contraseña?"),
+            LinkText(onPressed: () => Navigator.pushNamed(context, '/register'), text: "Registrarse"),
+            const SizedBox(height: 25),
+            OrDivider(),
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  SocialButton(onPressed: () => HandleSignIn(), imagePath: AssetImage('assets/images/google_icon.png'), text: "Iniciar con Google"),
+                  SocialButton(onPressed: () => {}, imagePath: AssetImage('assets/images/facebook_logo.png'), text: "Iniciar con Facebook"),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _login() {
@@ -156,12 +165,10 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
       isLoading = true;
     });
 
-    // Simular un delay para login (esto lo cambias por tu lógica de login)
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         isLoading = false;
       });
-      // Aquí manejas la respuesta del login
     });
   }
 
@@ -175,26 +182,17 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
   Future<void> HandleSignIn() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      if (googleUser == null) {
-        // El usuario canceló el inicio de sesión
-        return;
-      }
+      if (googleUser == null) return;
 
       final ggAuth = await googleUser.authentication;
-
-      // Obtén el correo electrónico
       final String email = googleUser.email;
       final String displayName = googleUser.displayName.toString();
-      // final String idToken = ggAuth.idToken.toString();
       final String accessToken = ggAuth.accessToken.toString();
-      // Envía el correo al backend para vincularlo
-      // Desconectar al usuario de Google después de obtener el correo
       await _googleSignIn.signOut();
 
-      print("Yeah baby");
+      print("Google login successful");
     } catch (error) {
       ShowErrorDialog(error.toString());
-      print('Error dude: $error');
     }
   }
 
@@ -220,29 +218,27 @@ class _LoginScreenState extends State<LoginScreen> with WidgetsBindingObserver {
 
   void _startSession() {
     setState(() {
-      isLoading = true; // Cambia el estado a cargando
+      isLoading = true;
     });
 
-    // Simula una tarea asíncrona
     Future.delayed(Duration(seconds: 2), () {
       setState(() {
-        isLoading = false; // Cambia el estado a no cargando
+        isLoading = false;
       });
       print("Session started");
     });
   }
 
   Future<void> signInWithFacebook() async {
-    // Trigger the sign-in flow
     final LoginResult loginResult = await FacebookAuth.instance.login();
 
     if (loginResult.status == LoginStatus.success) {
       final AccessToken accessToken = loginResult.accessToken!;
-      print("Token de acceso: ${accessToken.tokenString}");
+      print("Access token: ${accessToken.tokenString}");
     } else if (loginResult.status == LoginStatus.cancelled) {
-      print("Inicio de sesión cancelado por el usuario");
+      print("Login canceled by the user");
     } else {
-      print("Error en el inicio de sesión: ${loginResult.message}");
+      print("Login error: ${loginResult.message}");
     }
   }
 }

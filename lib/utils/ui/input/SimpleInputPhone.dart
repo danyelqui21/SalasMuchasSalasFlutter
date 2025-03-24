@@ -23,31 +23,40 @@ class _SimplePhoneInputState extends State<SimpleInputPhone> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Número de teléfono",
+            "Correo electrónico",
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.bold,
               color: MyTheme.textColor,
             ),
           ),
-          SizedBox(height: 5), // Espacio entre el texto y el input
+          SizedBox(height: 6), // Espacio entre el texto y el input
           TextField(
             controller: _phoneController,
-            inputFormatters: [maskFormatter],
-            keyboardType: TextInputType.phone,
+            //inputFormatters: [maskFormatter],
+            keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-              hintText: '(XXX) XXX-XXXX',
+              hintText: 'email@example.mx',
               hintStyle: TextStyle(color: MyTheme.hintTextColor),
               filled: true,
-              fillColor: MyTheme.lightGray,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: BorderSide.none,
+              fillColor: MyTheme.white,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.black, width: 1), // Borde negro más grueso cuando está enfocado
               ),
-              contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 15),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.grey, width: 0.5), // Borde gris cuando está habilitado
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: Colors.grey, width: 1), // Borde gris por defecto
+              ),
+              contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10), // Ajustar altura y espacio con los bordes
             ),
             style: TextStyle(fontSize: 16),
-          ),
+          )
+
         ],
       ),
     );

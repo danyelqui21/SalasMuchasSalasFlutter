@@ -12,6 +12,7 @@ class MyTheme {
   static const Color hintTextColor = AppColors.hintTextColor;
   static const Color linkColor = AppColors.linkColor;
   static const Color borderColor = AppColors.borderColor;
+  static const Color unselectedBoderColor = AppColors.unselectedBorderColor;
   static const Color white = Colors.white;
 
   static final ThemeData lightTheme = ThemeData(
@@ -26,8 +27,8 @@ class MyTheme {
 
     // AppBar Theme
     appBarTheme: const AppBarTheme(
-      backgroundColor: primaryColor,
-      foregroundColor: Colors.white, // AppBar text and icon color
+      backgroundColor: Colors.white ,
+      foregroundColor: Colors.black, // AppBar text and icon color
     ),
 
     // Text Theme

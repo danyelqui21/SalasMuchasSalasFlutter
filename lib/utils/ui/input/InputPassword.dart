@@ -40,10 +40,9 @@ class _InputPasswordState extends State<InputPassword> {
           SizedBox(height: 5), // Espacio entre el texto y el input
           Container(
             decoration: BoxDecoration(
-              color: MyTheme.lightGray, // Color del campo de entrada
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(8),
             ),
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 0),
             child: TextField(
               controller: widget.controller,
               // Asigna el controlador
@@ -54,9 +53,20 @@ class _InputPasswordState extends State<InputPassword> {
               decoration: InputDecoration(
                 hintText: 'Ingresa tu contraseña', // Cambié aquí el texto a 'Ingresa tu contraseña'
                 hintStyle: TextStyle(color: MyTheme.hintTextColor),
-                border: InputBorder.none,
                 counterText: '',
-                contentPadding: EdgeInsets.symmetric(vertical: 18, horizontal: 6),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: Colors.black, width: 1), // Borde negro más grueso cuando está enfocado
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: Colors.grey, width: 0.5), // Borde gris cuando está habilitado
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(color: Colors.grey, width: 1), // Borde gris por defecto
+                ),
+                contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 10),
                 suffixIcon: IconButton(
                   icon: Icon(
                     showPassword ? Icons.visibility_off : Icons.visibility,
